@@ -1,0 +1,24 @@
+type Query {
+    statistics: Result
+}
+
+type Result {
+    status: Int
+	message: String
+    totalMoney_paid: Any,
+    totalMoney_unPaid: Any,
+    mostProduct: Product
+    leastProduct: Product
+}
+
+type Product {
+	productId: ID!
+	categoryId: ID!
+	productName: String!
+	productPrice: Int!
+	short_info: String!
+	long_info: String!
+	file_path: String!
+}
+
+scalar Any

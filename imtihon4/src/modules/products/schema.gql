@@ -1,0 +1,68 @@
+scalar Email
+
+input Pagination {
+	page: Int = 1
+	limit: Int = 10
+}
+
+type Query {
+	products(
+		productId: ID
+		categoryId: ID
+		search: String
+		pagination: Pagination = {}
+	): [Product!]!
+}
+
+type Mutation {
+	addProduct(
+		productName: String!,
+		categoryId: ID!,
+		productPrice:Int!,
+		short_info: String!,
+		long_info: String!,
+		file: Upload!
+	): Response!
+
+	changeProduct(
+		productId: ID!
+		productName: String,
+		categoryId: ID,
+		productPrice:Int,
+		short_info: String,
+		long_info: String
+	): Response!
+
+	deleteProduct(
+		productId: ID!
+	): Response!
+}
+
+type Product {
+	productId: ID!
+	categoryId: ID!
+	productName: String!
+	productPrice: Int!
+	short_info: String!
+	long_info: String!
+	file_path: String!
+}
+
+type User {
+	userId: ID!
+	username: String!
+	fullName: String!
+	email: Email!
+	bio: String
+	active: Boolean!
+}
+
+type Response {
+	status: Int!
+	message: String!
+	data: Any
+	token: Any
+}
+
+scalar Any
+scalar Upload

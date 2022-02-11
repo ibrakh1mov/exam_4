@@ -1,0 +1,43 @@
+scalar Email
+
+input Pagination {
+	page: Int = 1
+	limit: Int = 10
+}
+
+type Query {
+	categories(
+		categoryId: ID
+		search: String
+		pagination: Pagination = {}
+	): [Category!]!
+}
+
+type Mutation {
+    addCategory(
+		categoryName: String!,
+	): Response!
+
+	changeCategory(
+		categoryId: ID!,
+		categoryName: String!
+	): Response!
+
+	deleteCategory(
+		categoryId: ID!
+	): Response!
+}
+
+type Category {
+	categoryId: ID!,
+	categoryName: String!
+}
+
+type Response {
+	status: Int!
+	message: String!
+	data: Any
+	token: Any
+}
+
+scalar Any

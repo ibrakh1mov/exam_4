@@ -1,0 +1,49 @@
+scalar Email
+
+input Pagination {
+	page: Int = 1
+	limit: Int = 10
+}
+
+type Query {	
+	orders(
+		userId: ID
+		pagination: Pagination = {}
+	): [Order] 	
+}
+
+type Mutation {
+    addOrder(
+		productId: ID!
+	): Response!
+
+	changeOrder(
+		orderId: ID!
+		productId: ID!
+	): Response!
+
+    deleteOrder(
+		orderId: ID!
+	): Response!
+
+	pay: Response!
+}
+
+type Order {
+	orderId: ID
+	userId: ID
+	isPaid: Boolean
+	productId: ID
+	productName: String
+	count: Int
+	productPrice: Int
+}
+
+type Response {
+	status: Int!
+	message: String!
+	data: Any
+	token: Any
+}
+
+scalar Any
